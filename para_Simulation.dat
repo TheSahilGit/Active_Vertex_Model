@@ -1,0 +1,115 @@
+1                ! nrun
+4000000            ! nrun2_initialTime ! will take this time(it) data from nrun1 as initial for nrun2 
+1.0d0            ! Ao
+0.0d0            ! Co
+1.0d0            ! lambda
+0.05d0           ! beta
+0.06d0 !-0.4d0 !0.06d0           ! gamm
+1.0d0            ! eta
+1.0d6           ! totT
+1.0d-3           ! dt
+.true.           ! if_Do_T1 
+0.1              ! min_d_T1
+.true.           ! if_Do_T2
+0.25d0           ! min_area_T2
+.false.          ! if_Fixed_boundary
+.false.          ! if_bottom_borders_fixed
+.false.          ! if_top_borders_fixed
+.true.          ! if_PBC (periodic BCs -- see PARAMETERS.md)
+1000             ! it_dump (unit of it)
+1                ! T1_time_interval  (unit of it)
+1                ! T2_time_interval (unit of it)
+.false.           ! if_motility (Apolar_cell_motility)
+.false.          ! if_motility_gradient ! If false takes 'etas_max' to be uniform motility.
+.false.          ! if_motility_Eulerian (Eulerian vs Lagrangian gradient -- see PARAMETERS.md)
+0.04d0            ! etas_max ! (Apolar_motility_strength)
+0.0              ! etas_min ! (motility)
+0.5              ! mot_Lc   !(motility gradient length scale/Ly)
+.false.          ! if_motility_decay ! (temporal decay)
+10000            ! motility_decay_timeScale (unit of dt)
+.false.          ! if_motility_hotspot !(localised motility enhancement) ! takes 'etas_max' as max value. 
+2                ! number_of_hotspot
+4.0d0           ! sigma_hotspot
+.false.          ! if_Shear_tissue ( Make it true for any kind of shearing experiment)
+.false.          ! if_Sudden_Shearing
+1.0d0            ! sudden_shearStrength
+1                ! sudden_shearWhen
+.false.          ! if_Oscillatory_Shearing
+0.04              ! Oscl_shearStrength
+100                ! Oscl_shearWhen
+1.0d0            ! Oscl_freq_wo
+.false.          ! if_perturb_tissue
+.false.          ! if_sin_perturb
+2                ! sin_perturb_when (unit of it)
+1.0d-1           ! sin_perturb_strength
+2                ! sin_perturb_waveNumber
+.false.          ! if_dirac_comb
+100              ! comb_onPeriod (unit of it) 
+1000             ! comb_offPeriod (unit of it) 
+.false.          ! if_limb_force
+0.0d0            ! limb_force_strength
+.false.          ! if_cell_division
+0.7d0           ! area_0 (for cell division)
+.false.            ! if_squeeze_tissue
+1                  ! squeeze_when (unit of it)
+30.0d0             ! percent_squeeze  
+.false.            ! if_active_contractility (Fluctuating_ontractility)
+1.0d0             ! tau_contr  (Correlation time for Contractility)
+0.12d0             ! active_contr_strength
+.true.            ! if_ABP (Polar_motility)
+2.50d-1            ! vo
+1.0d0              ! Dr
+.false.             ! if_RhoROCK (Mechanochemical_Regulation)
+.false.             ! if_RK4
+2.0d0              ! nhill
+1.0d-2             ! K_hill
+10.0d0              ! A_Rho
+7.0d0              ! A_ROCK
+5.0d0              ! A_Myosin
+0.1d0              ! D_rho
+0.1d0              ! D_ROCK
+0.1d0             ! D_Myosin
+0.1d0             ! Myosin_Coupling_Strength
+.false.             ! if_myosin_noise
+.false.            ! if_gaussian_noise
+10.0d0              ! Myosin_noise_strength
+.false.              ! if_coupling_noise
+1.0d0               ! coupling_noise_strength
+.false.              ! if_polar_motility
+0.4d0               ! polar_motility_strength
+.false.              ! if_free_edge_adhesion (differential free-edge linetension. if_PBC must be .false.)
+0.06d0               ! gamm_free
+.false.              ! if_shrink_edge (T1 path, Bi et al. 2015 -- see PARAMETERS.md)
+0                    ! shrink_v1 (edge vertex ID; 0 0 = auto-pick edge nearest tissue centre)
+0                    ! shrink_v2
+50                   ! shrink_nstages (stages from l0 down to shrink_l_min, and again back up)
+1.0d-2               ! shrink_l_min (edge length at which the T1 is done)
+10000                ! shrink_stage_steps (steps the edge is held at each length)
+.false.              ! shrink_freeze_beta (hold each cell's beta during the protocol: RhoROCK or FC)
+0                    ! shrink_relax_steps (free relaxation before the protocol; l0 taken at its end)
+.false.              ! if_excluded_volume (vertex-edge repulsion + no-crossing T1; branch no_overlap)
+0.05d0               ! ev_d0 (repulsion range)
+100.0d0              ! ev_k (repulsion stiffness)
+1                    ! series_stride (per-step series stored once per this many steps; 1 = every step)
+0                    ! rng_seed (> 0 seeds the random numbers; 0 = unseeded; state written to data/rng_seed.dat)
+0                    ! mr_noise_mode (MR coupling noise: 0 = per-step uniform draw as before; 1 = Ornstein-Uhlenbeck)
+1.0d0                ! mr_noise_tau (mode 1: correlation time)
+-1.0d0               ! mr_noise_sd (mode 1: stationary s.d.; < 0 = intensity-matched to mode 0 at dt = 1e-4)
+0                    ! abp_force_mode (ABP: 0 = vertex gets the average over its cells; 1 = the sum, as PM)
+.false.              ! if_variable_box (PBC only: box rescales isotropically, total area free -- see PARAMETERS.md)
+0.0d0                ! box_mobility (0 = box friction from the vertex friction, see PARAMETERS.md; > 0 = fixed mobility, testing)
+0.0d0                ! box_pressure (imposed external pressure; 0 = free tissue)
+.false.              ! box_aniso (if_variable_box: Lx_box and Ly_box relax separately, LE strain held)
+.false.              ! mr_feedback_off (if_RhoROCK: beta_c = (mr_beta_mean + coupling noise)/(lambda Ao); noise-only control)
+0.0d0                ! mr_beta_mean
+.false.              ! fc_clip_negative (FC: contractility set to 0 whenever an OU step makes it negative)
+
+!------------------------------------------------------------------------
+!                             *CAUTION*
+! -----------------------------------------------------------------------
+! Everything above this line is read positionally by allocation.f90's
+! read_input -- do not add/remove/reorder lines above without updating
+! that subroutine (and ReadPara1Params.m's matching `names` list) at the
+! exact same position.
+!
+! Nothing below this line is ever read.
